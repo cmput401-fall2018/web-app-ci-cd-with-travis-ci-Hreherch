@@ -1,3 +1,3 @@
 
-define testAssert():
+def testAssert():
     assert(True)
