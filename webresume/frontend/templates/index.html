@@ -7,33 +7,43 @@
   <title>Insert Title Here</title>
 
 
-  <!-- <link rel="stylesheet" href="style.css"> -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 </head>
 
-<body>
-  <h1 id="name">Name</h1>
-  <p id="about">About</p>
-  <p id="education">Education</p>
-  <p id="skills">Skills</p>
-  <p id="work">Work</p>
-  <p id="contact">Contact</p>
+<body style="text-align:center; background-color: blueviolet; color: white;">
+  <div class="w3-container">
+    <h1 id="name"></h1>
+    <p id="about"></p>
+    <p id="education"></p>
+    <p id="skills"></p>
+    <p id="work"></p>
+    <p id="contact"></p>
+  </div>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script>
   $(window).on('load', function(){
      // change the URL to your server URL here
-     $.getJSON("http://199.116.235.226/api/person/1/", function (data) {
-          $("#name").text(data.data.attributes.name);
-          $("#about").text(data.data.attributes.about);
-          $("#education").text(data.data.attributes.education);
-          $("#skills").text(data.data.attributes.skills);
-          $("#work").text(data.data.attributes.work);
-          $("#contact").text(data.data.attributes.contact);
+     url = "199.116.235.226:8000"
+     localUrl = "127.0.0.1:8000"
+
+    function showDataCool(name, data) {
+      return function () {
+        $(name).text(data)
+        $(name).attr("class", "w3-animate-bottom")
+      }
+    }
+
+     $.getJSON(`http://${url}/api/person/1/`, function (data) {
+          var attrs = data.data.attributes;
+          setTimeout(showDataCool("#name", attrs.name), 500);
+          setTimeout(showDataCool("#about", attrs.about), 1000);
+          setTimeout(showDataCool("#education", attrs.education), 1500);
+          setTimeout(showDataCool("#skills", attrs.skills), 2000);
+          setTimeout(showDataCool("#work", attrs.work), 2500);
+          setTimeout(showDataCool("#contact", attrs.contact), 3000);
           // Complete consuming the API data and updating the work and contact sections
           // HINT: look at the above lines, jquery documentation, see what is the object returned
-     
-     
-
      });
   });
   </script>
